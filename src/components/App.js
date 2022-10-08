@@ -1,13 +1,18 @@
 import { GlobalStyle } from "../GlobalStyle";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Logo from "./Logo";
 import Movie from "./Movie";
+import Tickets from "./Tickets";
 export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
       <Logo />
-      <Movie />
-    </>
+      <Routes>
+        <Route path="/" element={<Movie />} />
+        <Route path="/ticket/:id" element={<Tickets/>}/>
+        
+      </Routes>
+    </BrowserRouter>
   );
 }
-

@@ -10,7 +10,8 @@ export default function DefaultTitle(props) {
 const ContainerTitle = styled.div`
   height: 110px;
   width: 100%;
-  background-color: yellowgreen;
+  margin-top: 67px;
+  background-color: #C3F8FF;
   display: flex;
   align-items: center;
   justify-content: center;

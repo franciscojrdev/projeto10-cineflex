@@ -13,6 +13,8 @@ const StyledLogo = styled.div`
   width: 100%;
   background-color: #c3cfd9;
   display: flex;
+  position: fixed;
+  top: 0;
   justify-content: center;
   align-items: center;
 
