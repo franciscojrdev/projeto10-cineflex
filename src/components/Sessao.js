@@ -1,51 +1,41 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import DefaultTitle from "./DefaultTitle";
 import axios from "axios";
 import styled from "styled-components";
-import TicketsSection from "./TicketsSection";
-export default function Tickets() {
-  const { id } = useParams();
-  const [tickets, setTickets] = useState([]);
+
+export default function Sessao() {
+  const [dataSeats, setDataSeats] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v5/cineflex/movies/${id}/showtimes`
+      "https://mock-api.driven.com.br/api/v5/cineflex/showtimes/10/seats"
     );
 
-    promise.then((res) => setTickets(res.data));
+    promise.then((res) => setDataSeats(res.data));
 
-    promise.catch((res)=> console.log(res.data));
   }, []);
-
+  console.log(dataSeats)
   return (
     <>
       <DefaultTitle>
-        <h1>Selecione o horário</h1>
+        <h1>Selecione o(s) assento(s)</h1>
       </DefaultTitle>
-      <ContainerTickets>
-        {tickets &&
-          tickets.days?.map((el) => (
-            <TicketsSection
-              date={el.date}
-              weekday={el.weekday}
-              showtimes={el.showtimes}
-            />
-          ))}
-      </ContainerTickets>
+      <ContainerSeats>{console.log(dataSeats)}</ContainerSeats>
       <ContainerFooter>
         <MovieBanner>
-          <img src={tickets.posterURL}></img>
+          <img src={dataSeats.movie.posterURL}/>
         </MovieBanner>
-        <Title>{tickets.title} </Title>
+        <Title>{dataSeats.movie.title} <br/> {dataSeats.day.weekday} - {dataSeats.name}</Title>
       </ContainerFooter>
     </>
   );
 }
 
-const ContainerTickets = styled.div`
-  width: auto;
-  height: auto;
+const ContainerSeats = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 `;
 
 const ContainerFooter = styled.footer`
