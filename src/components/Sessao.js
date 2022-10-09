@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import DefaultTitle from "./DefaultTitle";
 import axios from "axios";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 export default function Sessao() {
+  const {id} = useParams();
   const [dataSeats, setDataSeats] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(
-      "https://mock-api.driven.com.br/api/v5/cineflex/showtimes/10/seats"
+      `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${id}/seats`
     );
 
     promise.then((res) => setDataSeats(res.data));
@@ -23,9 +25,9 @@ export default function Sessao() {
       <ContainerSeats>{console.log(dataSeats)}</ContainerSeats>
       <ContainerFooter>
         <MovieBanner>
-          <img src={dataSeats.movie.posterURL}/>
+          <img src={dataSeats.movie?.posterURL}/>
         </MovieBanner>
-        <Title>{dataSeats.movie.title} <br/> {dataSeats.day.weekday} - {dataSeats.name}</Title>
+        <Title>{dataSeats.movie?.title} <br/> {dataSeats.day?.weekday} - {dataSeats.name}</Title>
       </ContainerFooter>
     </>
   );
