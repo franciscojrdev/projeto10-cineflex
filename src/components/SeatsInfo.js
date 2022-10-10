@@ -2,15 +2,15 @@ import styled from "styled-components";
 export default function SeatsInfo() {
   return (
     <InfoArea>
-      <div>
+      <div data-identifier="seat-selected-subtitle">
         <Circle1></Circle1>
         <h3>Selecionado</h3>
       </div>
-      <div>
+      <div data-identifier="seat-available-subtitle">
         <Circle2></Circle2>
         <h3>Disponível</h3>
       </div>
-      <div>
+      <div data-identifier="seat-unavailable-subtitle">
         <Circle3></Circle3>
         <h3>Indisponível</h3>
       </div>

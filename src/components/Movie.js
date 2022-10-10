@@ -25,7 +25,7 @@ export default function Movie() {
         {items.map((item, i) => (
           <Link key={i} to={`/ticket/${item.id}`}>
             <StyleList>
-              <img src={item.posterURL} />
+              <img data-identifier="movie-outdoor" src={item.posterURL} />
             </StyleList>
           </Link>
         ))}

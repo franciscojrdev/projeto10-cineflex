@@ -54,14 +54,14 @@ export default function Sessao() {
       name: name,
       cpf: cpf,
     };
-    console.log(body);
+    // console.log(body);
 
     const promise = axios.post(URL, body);
     promise.then(() => {
       navigate("/sucesso", {
         state: {
           title: dataSeats.movie?.title,
-          weekday: dataSeats.day?.weekday,
+          date: dataSeats.day?.date,
           nome:dataSeats.name,
           seats:listSeats,
           name:name,
@@ -100,6 +100,7 @@ export default function Sessao() {
             onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Digite seu nome..."
+            data-identifier="buyer-name-input"
             required
           ></input>
           <label htmlFor="fcpf">CPF do Comprador</label>
@@ -109,11 +110,11 @@ export default function Sessao() {
             value={cpf}
             onChange={(e) => setCpf(e.target.value)}
             type="text"
-            pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"
             placeholder="Digite seu CPF..."
+            data-identifier="buyer-cpf-input"
             required
           ></input>
-          <button type="submit">Reservar assento(s)</button>
+          <button data-identifier="reservation-btn" type="submit">Reservar assento(s)</button>
         </form>
       </ContainerForm>
       <ContainerFooter>

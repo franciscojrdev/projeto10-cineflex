@@ -4,12 +4,12 @@ import styled from "styled-components";
 export default function TicketsSection({ date, weekday, showtimes }) {
   return (
     <Section>
-      <h1>
+      <h1 data-identifier="session-date">
         {date} - {weekday}
       </h1>
-      {showtimes.map((el) => (
-        <Link to={`/sessao/${el.id}`}>
-          <button>{el.name}</button>
+      {showtimes.map((el,i) => (
+        <Link key={i} to={`/sessao/${el.id}`}>
+          <button data-identifier="hour-minute-btn">{el.name}</button>
         </Link>
       ))}
     </Section>

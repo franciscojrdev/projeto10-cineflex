@@ -12,26 +12,26 @@ export default function SuccessPage() {
       </Title>
       <CardInfo>
         <h1>Filme e sessão</h1>
-        <h2>{location.state.title}</h2>
-        <h2>
-          {location.state.weekday} - {location.state.nome}
+        <h2 data-identifier="movie-session-infos-reserve-finished">{location.state.title}</h2>
+        <h2 data-identifier="movie-session-infos-reserve-finished">
+          {location.state.date}  {location.state.nome}
         </h2>
       </CardInfo>
       <CardInfo>
         <h1>Ingressos</h1>
         {location.state.seats.map((el, i) => (
-          <h2 key={i}>Assento {el}</h2>
+          <h2 data-identifier="seat-infos-reserve-finished" key={i}>Assento {el}</h2>
         ))}
       </CardInfo>
       <CardInfo>
         <h1>Comprador</h1>
-        <h2>Nome: {location.state.name}</h2>
-        <h2>CPF: {location.state.cpf}</h2>
+        <h2 data-identifier="buyer-infos-reserve-finished">Nome: {location.state.name}</h2>
+        <h2 data-identifier="buyer-infos-reserve-finished">CPF: {location.state.cpf}</h2>
       </CardInfo>
 
       <BackStart>
         <Link to="/">
-          <button>Voltar pra Home</button>
+          <button data-identifier="back-to-home-btn">Voltar pra Home</button>
         </Link>
       </BackStart>
     </>

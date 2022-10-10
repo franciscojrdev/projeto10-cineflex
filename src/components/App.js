@@ -12,7 +12,7 @@ export default function App() {
       <Logo />
       <Routes>
         <Route path="/" element={<Movie />} />
-        <Route path="/ticket/:id" element={<Tickets />} />
+        <Route path="/ticket/:idFilme" element={<Tickets />} />
         <Route path="/sessao/:idSessao" element={<Sessao />} />
         <Route path="/sucesso" element={<SuccessPage />} />
       </Routes>
