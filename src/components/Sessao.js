@@ -3,13 +3,16 @@ import DefaultTitle from "./DefaultTitle";
 import SeatSection from "./SeatSection";
 import axios from "axios";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SeatsInfo from "./SeatsInfo";
 
 export default function Sessao() {
   const { idSessao } = useParams();
   const [dataSeats, setDataSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [name, setName] = useState("");
+  const [cpf, setCpf] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const promise = axios.get(
@@ -37,7 +40,39 @@ export default function Sessao() {
     setSelectedSeats([...selectedSeats, seat]);
     return;
   }
-  console.log(selectedSeats);
+
+  let newArray = selectedSeats.map((el) => el.id);
+  let listSeats = selectedSeats.map((el) => el.name);
+
+  function addUser(e) {
+    e.preventDefault();
+
+    const URL =
+      "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
+    const body = {
+      ids: newArray,
+      name: name,
+      cpf: cpf,
+    };
+    console.log(body);
+
+    const promise = axios.post(URL, body);
+    promise.then(() => {
+      navigate("/sucesso", {
+        state: {
+          title: dataSeats.movie?.title,
+          weekday: dataSeats.day?.weekday,
+          nome:dataSeats.name,
+          seats:listSeats,
+          name:name,
+          cpf:cpf,
+        },
+      });
+    });
+    promise.catch((err) => {
+      console.log(err.response.data.message);
+    });
+  }
   return (
     <>
       <DefaultTitle>
@@ -56,23 +91,30 @@ export default function Sessao() {
       </ContainerSeats>
       <SeatsInfo />
       <ContainerForm>
-        <form>
+        <form onSubmit={addUser}>
           <label htmlFor="fname">Nome do Comprador</label>
           <input
             id="fname"
             name="nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Digite seu nome..."
+            required
           ></input>
           <label htmlFor="fcpf">CPF do Comprador</label>
           <input
             id="fcpf"
             name="cpf"
-            type="number"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            type="text"
+            pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"
             placeholder="Digite seu CPF..."
+            required
           ></input>
+          <button type="submit">Reservar assento(s)</button>
         </form>
-        <button>Reservar assento(s)</button>
       </ContainerForm>
       <ContainerFooter>
         <MovieBanner>
@@ -100,6 +142,18 @@ const ContainerForm = styled.div`
     height: auto;
     display: flex;
     flex-direction: column;
+    button {
+      height: 42px;
+      width: 225px;
+      background-color: #e8833a;
+      border-radius: 3px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+    }
   }
   label {
     text-align: start;
@@ -113,25 +167,17 @@ const ContainerForm = styled.div`
     height: 51px;
     width: 100%;
     border-radius: 3px;
-    border: 1px solid #D4D4D4;
+    border: 1px solid #d4d4d4;
     padding-left: 20px;
+    font-family: "Roboto";
+    font-size: 18px;
     ::placeholder {
-      font-family: "Roboto";
       font-size: 18px;
       font-style: italic;
       font-weight: 400;
       text-align: left;
-      color: #AFAFAF;
+      color: #afafaf;
     }
-  }
-  button {
-    height: 42px;
-    width: 225px;
-    background-color: #e8833a;
-    border-radius: 3px;
-    color: white;
-    border: none;
-    margin-top: 30px;
   }
 `;
 
