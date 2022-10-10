@@ -49,6 +49,7 @@ const BackStart = styled.div`
     width: 225px;
     border-radius: 3px;
     background-color: #e8833a;
+
     cursor: pointer;
 
     color: white;
@@ -56,8 +57,7 @@ const BackStart = styled.div`
     font-size: 18px;
     font-weight: 400;
     text-align: center;
-    border-color: none;
-    box-shadow: none;
+    border: none;
   }
 `;
 
