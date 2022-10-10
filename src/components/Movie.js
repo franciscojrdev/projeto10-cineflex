@@ -23,11 +23,11 @@ export default function Movie() {
       </DefaultTitle>
       <ContainerList>
         {items.map((item, i) => (
-          <StyleList key={i}>
-            <Link to={`/ticket/${item.id}`}>
+          <Link key={i} to={`/ticket/${item.id}`}>
+            <StyleList>
               <img src={item.posterURL} />
-            </Link>
-          </StyleList>
+            </StyleList>
+          </Link>
         ))}
       </ContainerList>
     </>

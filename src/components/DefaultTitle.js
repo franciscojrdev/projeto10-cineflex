@@ -11,10 +11,10 @@ const ContainerTitle = styled.div`
   height: 100px;
   width: 100%;
   margin-top: 67px;
-  /* background-color: #C3F8FF; */
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   h1 {
     font-family: "Roboto";

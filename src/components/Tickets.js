@@ -15,7 +15,7 @@ export default function Tickets() {
 
     promise.then((res) => setTickets(res.data));
 
-    promise.catch((res)=> console.log(res.data));
+    promise.catch((res) => console.log(res.data));
   }, []);
 
   return (
@@ -46,6 +46,7 @@ export default function Tickets() {
 const ContainerTickets = styled.div`
   width: auto;
   height: auto;
+  margin-bottom: 117px;
 `;
 
 const ContainerFooter = styled.footer`
@@ -55,7 +56,8 @@ const ContainerFooter = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
-  background-color: #9eadba;
+  background-color: #dfe6ed;
+  border: 1px solid #9eadba;
 `;
 
 const MovieBanner = styled.div`

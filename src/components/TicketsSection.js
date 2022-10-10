@@ -21,8 +21,7 @@ const Section = styled.div`
   height: auto;
   background-color: white;
   padding-left: 20px;
-  /* border: 1px solid black; */
-
+  
   h1 {
     font-family: "Roboto";
     font-size: 20px;
@@ -34,7 +33,7 @@ const Section = styled.div`
     height: 43px;
     width: 83px;
     margin-bottom: 23px;
-    margin-right: 20px;
+    margin-right: 8px;
     border-radius: 3px;
     background: #e8833a;
     border-color: #e8833a;

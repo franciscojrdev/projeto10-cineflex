@@ -4,16 +4,16 @@ import SeatSection from "./SeatSection";
 import axios from "axios";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import SeatsInfo from "./SeatsInfo";
 
 export default function Sessao() {
-  const { id } = useParams();
+  const { idSessao } = useParams();
   const [dataSeats, setDataSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-
   useEffect(() => {
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${id}/seats`
+      `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`
     );
 
     promise.then((res) => setDataSeats(res.data));
@@ -37,7 +37,7 @@ export default function Sessao() {
     setSelectedSeats([...selectedSeats, seat]);
     return;
   }
-  console.log(selectedSeats)
+  console.log(selectedSeats);
   return (
     <>
       <DefaultTitle>
@@ -54,32 +54,86 @@ export default function Sessao() {
           />
         ))}
       </ContainerSeats>
-      <InfoArea>
-        <div>
-          <main></main>
-          <h3>Selecionado</h3>
-        </div>
-        <div>
-          <main></main>
-          <h3>Disponível</h3>
-        </div>
-        <div>
-          <main></main>
-          <h3>Indisponível</h3>
-        </div>
-      </InfoArea>
+      <SeatsInfo />
+      <ContainerForm>
+        <form>
+          <label htmlFor="fname">Nome do Comprador</label>
+          <input
+            id="fname"
+            name="nome"
+            type="text"
+            placeholder="Digite seu nome..."
+          ></input>
+          <label htmlFor="fcpf">CPF do Comprador</label>
+          <input
+            id="fcpf"
+            name="cpf"
+            type="number"
+            placeholder="Digite seu CPF..."
+          ></input>
+        </form>
+        <button>Reservar assento(s)</button>
+      </ContainerForm>
       <ContainerFooter>
         <MovieBanner>
           <img src={dataSeats.movie?.posterURL} />
         </MovieBanner>
         <Title>
-          {dataSeats.movie?.title} <br /> {dataSeats.day?.weekday} -{" "}
-          {dataSeats.name}
+          {dataSeats.movie?.title} <br />
+          {dataSeats.day?.weekday} - {dataSeats.name}
         </Title>
       </ContainerFooter>
     </>
   );
 }
+
+const ContainerForm = styled.div`
+  width: 100%;
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 24px 0;
+  margin-bottom: 120px;
+  form {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    text-align: start;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 400;
+    color: #293845;
+    margin: 5px 0;
+  }
+  input {
+    height: 51px;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #D4D4D4;
+    padding-left: 20px;
+    ::placeholder {
+      font-family: "Roboto";
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 400;
+      text-align: left;
+      color: #AFAFAF;
+    }
+  }
+  button {
+    height: 42px;
+    width: 225px;
+    background-color: #e8833a;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    margin-top: 30px;
+  }
+`;
 
 const ContainerSeats = styled.div`
   display: flex;
@@ -89,34 +143,6 @@ const ContainerSeats = styled.div`
   gap: 10px 20px;
 `;
 
-const InfoArea = styled.div`
-  margin-top: 10px;
-  width: 100%;
-  display: flex;
-  height: auto;
-  justify-content: space-evenly;
-  div {
-    height: 50px;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    main {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background-color: #FBE192;
-    }
-    h1 {
-      font-family: "Roboto";
-      font-size: 13px;
-      font-weight: 400;
-      color: #4e5a65;
-    }
-  }
-`;
-
 const ContainerFooter = styled.footer`
   height: 117px;
   width: 100%;
@@ -124,7 +150,8 @@ const ContainerFooter = styled.footer`
   align-items: center;
   position: fixed;
   bottom: 0;
-  background-color: #9eadba;
+  background-color: #dfe6ed;
+  border: 1px solid #9eadba;
 `;
 
 const MovieBanner = styled.div`

@@ -48,4 +48,7 @@ table {
 *{
 	box-sizing: border-box;
 }
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
 `;

@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import Movie from "./Movie";
 import Tickets from "./Tickets";
 import Sessao from "./Sessao";
+import SuccessPage from "./SuccessPage";
 export default function App() {
   return (
     <BrowserRouter>
@@ -12,7 +13,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Movie />} />
         <Route path="/ticket/:id" element={<Tickets />} />
-        <Route path="/sessao/:id" element={<Sessao />} />
+        <Route path="/sessao/:idSessao" element={<Sessao />} />
+        <Route path="/sucesso" element={<SuccessPage />} />
       </Routes>
     </BrowserRouter>
   );
